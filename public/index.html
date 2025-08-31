@@ -1,329 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Champion Labs LLC - Engineering Everyday Wins"
+    />
+    <meta name="author" content="John Ludena" />
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+    <title>Champion Labs LLC | Engineering Everyday Wins</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="./favicon.png" />
-  <title>Champion Labs | HTX</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d0d1a;
-      font-family: "Press Start 2P", cursive;
-    }
+    <!-- Fonts -->
+    <!-- Pixelmix isn’t on Google Fonts, so swap with a pixel-style font like "Press Start 2P" -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
 
-    #canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
+    <style>
+      .logo-font {
+        font-family: "Press Start 2P", monospace;
+      }
+      .mono-font {
+        font-family: "Roboto Mono", monospace;
+      }
 
-    .content-wrapper {
-      padding: 30px;
-    }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    @keyframes fadeUp {
-      from {
+      .animate-fade-in {
         opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) rotate(0);
-      }
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 3em;
-      text-transform: uppercase;
-      line-height: 1.4;
-      color: #fff;
-      text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out forwards;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 40px;
-      }
-      .title {
-        font-size: 2.5em;
-      }
-    }
-
-    .slogan {
-      font-size: 1.2em;
-      line-height: 1.7;
-      max-width: 750px;
-      color: white;
-      text-align: center;
-      text-shadow: 0 0 10px #00ffff;
-      padding: 0 20px;
-      margin: 0 auto;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.3s forwards;
-    }
-
-    @media (max-width: 768px) {
-      .slogan {
-        font-size: 1em;
-      }
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding-top: 50px;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    .product:nth-child(1) { animation: fadeUp 0.8s ease-out 0.6s forwards; }
-    .product:nth-child(2) { animation: fadeUp 0.8s ease-out 0.9s forwards; }
-    .product:nth-child(3) { animation: fadeUp 0.8s ease-out 1.2s forwards; }
-    .product:nth-child(4) { animation: fadeUp 0.8s ease-out 1.5s forwards; }
-
-    .product {
-      width: 150px;
-      text-align: center;
-      position: relative;
-      transition: transform 0.3s;
-      cursor: pointer;
-      opacity: 0;
-      transform-origin: center center;
-    }
-
-    @media (max-width: 768px) {
-
-      .product {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
+        animation: fadeInUp 0.6s ease forwards;
       }
 
-      .product img {
-        width: 80px;
-        height: 80px;
+      .animate-fade-in:nth-child(1) {
+        animation-delay: 0.1s;
       }
-    }
-
-    .product:hover {
-      transform: rotate(10deg) scale(1.1) !important;
-    }
-
-    .product img {
-      width: 120px;
-      height: 120px;
-      border: 4px solid #e799f9; 
-      border-radius: 15px;
-      background: #1a1a33;
-      transition: border-color 0.3s;
-    }
-
-    .product:hover img {
-      border-color: #ff00ff;
-    }
-
-    .mystery {
-      filter: brightness(0.3) blur(2px);
-      position: relative;
-    }
-
-    .mystery::after {
-      content: "???";
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #ff00ff;
-      font-size: 1.5em;
-      text-shadow: 0 0 15px #ff00ff;
-      animation: pulse 1.5s infinite;
-    }
-
-    @media (max-width: 768px) {
-      .mystery::after {
-        font-size: 1em;
+      .animate-fade-in:nth-child(2) {
+        animation-delay: 0.3s;
       }
-    }
-
-    @keyframes pulse {
-      0% {
-        opacity: 0.6;
+      .animate-fade-in:nth-child(3) {
+        animation-delay: 0.5s;
       }
-
-      50% {
-        opacity: 1;
+      .animate-fade-in:nth-child(4) {
+        animation-delay: 0.7s;
       }
-
-      100% {
-        opacity: 0.6;
+      .animate-fade-in:nth-child(5) {
+        animation-delay: 0.9s;
       }
-    }
-
-    .product p {
-      margin: 10px 0 0;
-      color: white;
-      text-shadow: 0 0 10px #e799f9;
-      font-size: 1em;
-      line-height: 1.9;
-    }
-
-    @media (max-width: 768px) {
-      .product p {
-        font-size: 0.8em;
-        margin: 5px 0 0;
+      .animate-fade-in:nth-child(6) {
+        animation-delay: 1.1s;
       }
-    }
-
-    .footer {
-      margin-top: 50px;
-      text-align: center;
-      color: white;
-      text-shadow: 0 0 10px #e799f9;
-      font-size: 14px;
-      opacity: 0.5;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <canvas id="canvas"></canvas>
-  <div class="content-wrapper">
-    <div class="content">
-      <h1>Champion Labs,LLC</h1>
-      <div class="slogan">
-        <p>We create gamified mobile apps that help you level up in real life.</p>
-
-        <p>Because tech should empower you, not hinder you.</p>
-
+      .animate-fade-in.about-section {
+        animation-delay: 1.5s;
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white flex justify-center p-6 min-h-screen">
+    <div class="w-full max-w-[600px] flex flex-col">
+      <!-- Logo -->
+      <div class="text-center mb-4">
+        <h1 class="logo-font text-2xl tracking-wide">
+          CHAMPION<span style="color: #25e611"
+            ><span class="sr-only"> </span>LABS</span
+          >
+          <span class="sr-only"> LLC</span>
+        </h1>
+        <p class="mono-font text-gray-400 mt-2">Engineering Everyday Wins</p>
       </div>
+
+      <!-- Product Catalog -->
+      <h2 class="mono-font font-bold text-lg mt-8 mb-2">PRODUCT CATALOG</h2>
+      <hr class="border-gray-700 mb-4" />
+
+      <!-- Product Card -->
+      <div class="space-y-4 mb-12">
+        <!-- Pomodoro Champion -->
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img
+                src="./images/pomodoro-champion.png"
+                al="Pomodoro Champion icon"
+              />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">Pomodoro Champion</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                Social Pomodoro timer with gamified group accountability to stop
+                phone addiction in its tracks and unlock the powerful flow
+                state.
+              </p>
+              <a
+                href="https://www.pomodorochampion.com"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >pomodorochampion.com</a
+              >
+            </div>
+          </div>
+          <hr class="border-gray-700 mb-4" />
+        </div>
+
+        <!-- Reply Robby -->
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img src="./images/reply-robby.png" al="Reply Robby icon" />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">Reply Robby</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                AI ghostwriter that helps you generate high-impact AI replies to
+                grow your small X account fast.
+              </p>
+              <a
+                href="https://www.replyrobby.com"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >replyrobby.com</a
+              >
+            </div>
+          </div>
+          <hr class="border-gray-700 mb-4" />
+        </div>
+
+        <!-- Keeb Junkie -->
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img src="./images/keeb-junkie.png" al="Keeb Junkie icon" />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">Keeb Junkie</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                Hand-picked, one-of-a-kind artisan keycaps for mechanical
+                keyboard enthusiasts.
+              </p>
+              <a
+                href="https://www.keebjunkie.com"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >keebjunkie.com</a
+              >
+            </div>
+          </div>
+          <hr class="border-gray-700 mb-4" />
+        </div>
+
+        <!-- Fading Ink -->
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img src="./images/fading-ink.png" al="Fading Ink icon" />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">Fading Ink</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                Journaling app where your words fade as you write, letting you
+                brain dump without overly editing yourself – and then track your
+                mental health over time.
+              </p>
+              <a
+                href="https://www.fadingink.app"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >fadingink.app</a
+              >
+            </div>
+          </div>
+          <hr class="border-gray-700 mb-4" />
+        </div>
+
+        <!-- Rumble in the Jungle -->
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img
+                src="./images/rumble-in-the-jungle.png"
+                al="Rumble in the Jungle icon"
+              />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">Rumble in the Jungle</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                Casual pixel art game: 100 men vs. 1 gorilla (play for free in
+                your mobile or browser)
+              </p>
+              <a
+                href="https://www.rumbleinthejungle.gg"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >rumbleinthejungle.gg</a
+              >
+            </div>
+          </div>
+
+          <hr class="border-gray-700 mb-4" />
+        </div>
+
+        <div class="animate-fade-in">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0"
+            ></div>
+            <div>
+              <h3 class="mono-font font-bold">Mino Maze</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                POV survival horror game with randomly generated mazes to escape
+                the legendary Minotaur of Greek mythology.
+              </p>
+              <a
+                href="#"
+                target="_blank"
+                class="mono-font text-blue-400 text-sm mt-2 inline-block hover:text-blue-300"
+                >TBD</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="animate-fade-in about-section">
+        <h2 class="mono-font font-bold text-lg mt-8 mb-2">ABOUT</h2>
+        <hr class="border-gray-700 mb-4" />
+
+        <div class="mb-12">
+          <div class="flex space-x-4 items-start mb-4">
+            <div
+              class="w-28 h-28 rounded-[10px] bg-gray-600 flex-shrink-0 overflow-hidden"
+            >
+              <img src="./images/john-ludena.png" al="John Ludena" />
+            </div>
+            <div>
+              <h3 class="mono-font font-bold">John Ludena</h3>
+              <p class="mono-font text-gray-300 text-sm mt-1">
+                Hi, I’m John Ludena — a Software Engineer with a background in
+                design and over 14 years of experience building things for the Web. I’m
+                passionate about creating products that help people use technology to improve their lives (not ruin them). Every day, I
+                challenge myself to try new things, learn, and push the
+                boundaries of what’s possible.
+              </p>
+              <div class="flex space-x-4 mt-3">
+                <a
+                  href="https://www.johnludena.com"
+                  target="_blank"
+                  class="mono-font text-blue-400 text-sm hover:text-blue-300"
+                >
+                  Blog
+                </a>
+                                <a
+                  href="#"
+                  target="_blank"
+                  class="mono-font text-blue-400 text-sm hover:text-blue-300"
+                >
+                  Resume
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/john-ludena"
+                  target="_blank"
+                  class="mono-font text-blue-400 text-sm hover:text-blue-300"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://www.x.com/johnnycommits"
+                  target="_blank"
+                  class="mono-font text-blue-400 text-sm hover:text-blue-300"
+                >
+                  X
+                </a>
+                <a
+                  href="https://www.youtube.com/@JohnnyCommits"
+                  target="_blank"
+                  class="mono-font text-blue-400 text-sm hover:text-blue-300"
+                >
+                  YouTube
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mono-font text-xs text-gray-500 text-center mt-auto">
+        &copy; 2024 - 2025 Champion Labs LLC
+      </footer>
     </div>
-    <div class="products">
-      <a href="https://apps.apple.com/app/id6739970774" target="_blank" class="product">
-        <img src="./images/pomodoro-champion.jpg" alt="Pomodoro Champion" />
-        <p>Pomodoro Champion</p>
-      </a>
-      <a href="#" class="product">
-        <img src="./images/mystery-app.jpg" alt="Mystery App 1" class="mystery" />
-        <p>???</p>
-      </a>
-      <a href="#" class="product">
-        <img src="./images/mystery-app.jpg" alt="Mystery App 2" class="mystery" />
-        <p>???</p>
-      </a>
-      <a href="#" class="product">
-        <img src="./images/mystery-app.jpg" alt="Mystery App 3" class="mystery" />
-        <p>???</p>
-      </a>
-    </div>
-
-    <div class="footer">
-      <p>© 2025 Champion Labs, LLC. All rights reserved.</p>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script>
-    // Three.js Retro-Futuristic Moving Grid and Horizon
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    const renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("canvas"),
-      alpha: true,
-    });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-    });
-
-    // Moving Grid (Pink Wireframe on Dark Purple, bottom half)
-    const gridGeometry = new THREE.PlaneGeometry(200, 100, 50, 50); // Smaller height for bottom half
-    const gridMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff, // White for the grid lines
-      wireframe: true,
-      transparent: true,
-      opacity: 0.5, // Slightly more subtle
-    });
-    const grid = new THREE.Mesh(gridGeometry, gridMaterial);
-    grid.rotation.x = -Math.PI / 2; // Flat on the ground
-    grid.position.set(0, -5, -10); // Positioned for bottom half
-    scene.add(grid);
-
-    // Horizon Gradient (Top half, purple to pink gradient)
-    const horizonGeometry = new THREE.PlaneGeometry(200, 100); // Larger height for top half
-    const horizonMaterial = new THREE.ShaderMaterial({
-      vertexShader: `
-                varying vec2 vUv;
-                void main() {
-                    vUv = uv;
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                }
-            `,
-      fragmentShader: `
-                varying vec2 vUv;
-                void main() {
-                    vec3 black = vec3(0.0, 0.0, 0.0);    // Pure black (top)
-                    vec3 darkGray = vec3(0.1, 0.1, 0.1); // Dark gray (bottom)
-                    float y = vUv.y;
-                    vec3 color = mix(black, darkGray, y);
-                    gl_FragColor = vec4(color, 0.8);
-                }
-            `,
-      side: THREE.DoubleSide,
-      transparent: true,
-    });
-    const horizon = new THREE.Mesh(horizonGeometry, horizonMaterial);
-    horizon.position.set(0, 5, -50); // Positioned for top half, far in the distance
-    scene.add(horizon);
-
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040);
-    scene.add(ambientLight);
-    const pointLight = new THREE.PointLight(0xffffff, 0.8, 100); // White light with reduced intensity
-    pointLight.position.set(0, 20, 0);
-    scene.add(pointLight);
-
-    camera.position.set(0, 0, 10); // Static camera, no panning
-    camera.lookAt(0, 0, -10);
-
-    // Animation for Smooth Grid Movement
-    let speed = 0.08; // Smooth movement speed
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      // Move the grid (road) forward smoothly
-      grid.position.z += speed;
-      if (grid.position.z > 0) grid.position.z = -10; // Loop the grid
-
-      // Keep horizon static
-      horizon.position.z = -50;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
-</body>
-
+  </body>
 </html>
